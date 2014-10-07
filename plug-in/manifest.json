@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+
+
+  "name": "toPDF",
+  "version": "0.10",
+  "description": "webpage to pdf",
+  "author": "Banama",
+
+
+  "browser_action": {
+    "default_icon": {
+      "19": "icon/icon19.png",
+      "38": "icon/icon38.png"
+    }
+  },
+  "icons": {
+    "16": "icon/icon16.png",
+    "32": "icon/icon32.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+
+
+  "background": {
+    "scripts": ["screenshot.js", "actions.js"]
+  },
+  "content_scripts": [ 
+    { "js": [ "DOM.js", "blanketStyleSet.js" ], "matches": [ "<all_urls>" ], "run_at": "document_end" }
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ]
+}

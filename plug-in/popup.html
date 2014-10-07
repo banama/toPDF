@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>toPDF</title>
+  <script type="text/javascript" src="static/jquery-1.4.2.min.js"></script>
+  <script>
+    function doCapture() {
+      chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+      chrome.browserAction.setBadgeText({ text: "grab" });
+      
+      chrome.extension.sendMessage({ action: 'grab' });
+    }
+
+    window.onload = function() {
+      doCapture();
+    }
+  </script>
+</head>
+<body>
+<div class="ui">
+  <div id="status" class="message working">Capturing...</div>
+  <p style="-webkit-box-shadow: 0px 5px 10px #000000; margin: 20px; background: #ffffff; position: absolute; top: 0; right: 0; z-index: 666667 !important;" style="display:none"><img id="blipshot-img" alt="' + filename + '" src="' +  blobURL + '" width= "400" /></p>';
+    
+</div>
+
+</body>
+</html>
