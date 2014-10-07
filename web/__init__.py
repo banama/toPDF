@@ -1,6 +1,7 @@
 #coding:utf8
 import tornado.ioloop
 import tornado.web
+from toPDF import topdf
 
 class index(tornado.web.RequestHandler):
 	def get(self):
@@ -8,7 +9,9 @@ class index(tornado.web.RequestHandler):
 	def post(self):
 		img = self.get_argument('img')
 		print img
-		self.write(img)
+		filename = self.get_argument('filename')
+		topdf(img)
+		self.write(topdf(img))
 
 application = tornado.web.Application([
 	(r"/", index)

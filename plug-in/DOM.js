@@ -40,9 +40,8 @@
     var d = new Date();
     var timestamp = '' + d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDay()) + '-' + pad2(d.getHours()) + '' + pad2(d.getMinutes()) + '';
     var filename = "pageshot of '" + normalizeFileName(shared.tab.title) + "' @ " + timestamp;
-    console.log(shared.imageDataURL)
+    var blobURL = dataToBlobURL(shared.imageDataURL);
 
-    // xhr
     var xhr = new XMLHttpRequest();;
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -55,15 +54,12 @@
     };
     xhr.open("post", "http://127.0.0.1:8888/", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("img="+shared.imageDataURL);
-    var blobURL = shared.imageDataURL;
-
+    xhr.send("img="+shared.imageDataURL+"&filename="+blobURL);
     // ****** Add DOM Elements to Page
     var div = window.document.createElement('div');
     div.id = "blipshot";
     div.innerHTML = '<div id="blipshot-dim" style="position: absolute !important; height: ' + window.document.body.scrollHeight + 'px !important; width: 100% !important; top: 0px !important; left: 0px !important; background: #000000 !important; opacity: 0.66 !important; z-index: 666666 !important;"> </div>';
-    //div.innerHTML += '<p style="-webkit-box-shadow: 0px 5px 10px #000000; margin: 20px; background: #ffffff; position: absolute; top: 0; right: 0; z-index: 666667 !important;"><img id="blipshot-img" alt="' + filename + '" src="' +  blobURL + '" width= "400" /></p>';
-    div.innerHTML += '<p>asas</p>' 
+    div.innerHTML += '<p style="-webkit-box-shadow: 0px 5px 10px #000000; margin: 20px; background: #ffffff; position: absolute; top: 0; right: 0; z-index: 666667 !important;"><img id="blipshot-img" alt="' + filename + '" src="' +  blobURL + '" width= "400" /></p>';
     window.document.body.appendChild(div);
     
     // ****** Add Event Listeners
