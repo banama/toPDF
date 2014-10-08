@@ -41,6 +41,8 @@
     var timestamp = '' + d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDay()) + '-' + pad2(d.getHours()) + '' + pad2(d.getMinutes()) + '';
     var filename = "pageshot of '" + normalizeFileName(shared.tab.title) + "' @ " + timestamp;
     var blobURL = dataToBlobURL(shared.imageDataURL);
+    var new_image = new Image();
+    new_image.src = shared.imageDataURL;
 
     var xhr = new XMLHttpRequest();;
     xhr.onreadystatechange = function () {
@@ -53,8 +55,8 @@
         }
     };
     xhr.open("post", "http://127.0.0.1:8888/", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("img="+shared.imageDataURL+"&filename="+blobURL);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded ");
+    xhr.send("img="+encodeURIComponent(shared.imageDataURL)+"&width="+new_image.width+"&height="+new_image.height);
     // ****** Add DOM Elements to Page
     var div = window.document.createElement('div');
     div.id = "blipshot";
