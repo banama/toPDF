@@ -4,9 +4,6 @@ import tornado.ioloop
 from toPDF import topdf
 import os
 
-# import tornado.wsgi
-# import sae
-# import tornado
 
 class version(tornado.web.RequestHandler):
     def get(self):
@@ -21,12 +18,25 @@ class index(tornado.web.RequestHandler):
         width = self.get_argument('width')
         height = self.get_argument('height')
         _topdf = topdf(img, width=width, height=height)
-        self.write(_topdf.topdf())
+        self.write(_topdf.topdf().split('.')[0])
+
+class pdf(tornado.web.RequestHandler):
+    def get(self, input):
+        if input == "1":
+            mark = False
+            self.render('pdf.html', mark = mark)
+        else:
+            mark = True
+            pdfurl = 'http://topdfs-pdf.stor.sinaapp.com/pdf/' + input + '.pdf'
+            self.render('pdf.html', pdf = pdfurl, mark = mark)
 
 class exsit(tornado.web.RequestHandler):
     def post(self):
         pdfcode = self.get_argument('pdfcode')
-        self.write('t')
+        if pdfcode == '1':
+            self.write('f')
+        else:
+            self.write('t')
 
 class Show(tornado.web.RequestHandler):
     def post(self):
@@ -41,6 +51,7 @@ class Show(tornado.web.RequestHandler):
 application = tornado.web.Application(
     handlers = [
         (r"/", index),
+        (r"/pdf/([0-9a-zA-Z\-]*)", pdf),
         (r"/exsit", exsit),
         (r"/show", Show)
         ],

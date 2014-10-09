@@ -23,13 +23,21 @@
 		      </span>
 		    </div>
 
-		    <!-- loading -->
 		    <div class="loading" style="display:none">
-		    	<img src="static/image/loading.gif" width="25%" height="25%">
+		    	<img src="http://topdfs-pdf.stor.sinaapp.com/loading.gif" width="25%" height="25%">
+		    </div>
+
+		    <div class="nopdf" style="display:none">
+		    	<p>没有识别码对应的文件，是否文件已过期？请换一个识别码!</p>
+		    	<p> Ps：登录可以保存文件</p>
+		    </div>
+		    
+		    <div class="pdf" style="display:none">
 		    </div>
 
 		    <!-- refer -->
 		    <div class="refer fix-top" style="display:none">
+		    	<br>
 		    	<p>在你的网页引用下载该文件</p>
 		    	<pre>
 &lt;a href=""&gt;&lt;img style="position: fixed; top: 75px; right: 75px; border: 0;" src="http://www.easyicon.net/api/resize_png_new.php?id=1168993&size=32"&gt;&lt;/a&gt;
@@ -70,6 +78,7 @@ seajs.use("{{ static_url('script/index.js')}}");
 		</div>
 	</div>
 </div>
+<a href='http://topdfs.sinaapp.com/pdf/ada06a00-4fa5-11e4-8b25-dbfc6631a814' target="_blank"><img style='position: fixed; top: 75px; right: 75px; border: 0;'src='static/image/pdf32.png'></a>
 {% end %}
 
 {% block foot %}{% end %}

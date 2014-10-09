@@ -1,25 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-   	<title>pdf</title>
-   	<link rel="stylesheet" href="{{ static_url("bower_components/bootstrap/dist/css/bootstrap.css") }}">
-</head>
-<body>
-    <p>pdf- {{pdf}}</p>
-    <form action="/show" method='post'>
-    	<input name="pdf" type="text">
-    	<button type="submit">
-    </form>
-<script src="{{ static_url('bower_components/seajs/dist/sea.js')}}" type="text/javascript"></script>
-<script type="text/javascript">
-seajs.config({
-    base: "../../../",
-    alias: {
-      "jquery": "jquery/dist/jquery.min",
-    }
-});
+{% extends "layout.html" %}
+{% block header %}
+<div class="top">
+  <div class="container">
+    <h1>ToPDF</h1>
+    <p>将网页转化为PDF格式文件,  依赖一个Chrome插件,  便可一键转化.</p>
+  
+    <!-- <iframe src="http://ghbtns.com/github-btn.html?user=banama&repo=topdf&type=watch"
+  allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe> -->
+  </div>
+</div>
+{% end %}
 
-require('jquery')
-</script>
-</body>
-</html>
+{% block container %}
+
+    {% if mark is True%}
+      <div class="container">
+        <div class="error-no">
+          <a href="{{pdf}}" style="display:block"><img src="{{ static_url('image/pdf.png')}}"></a>
+          <br>
+          <a href="{{pdf}}">点击下载</a>&nbsp;/&nbsp;<a href="http://127.0.0.1:8888">回到主页</a>
+        </div>
+      </div>
+
+    {% else %}
+<!--      <script type="text/javascript"></script>
+     setTimeout("window.location.href='http://127.0.0.1:8888';", 3000 );
+     </script> -->
+    <div class="container">
+      <div class="error-no">
+        <h2>没有你要的文件</h2>
+        <br>
+        <a href="http://127.0.0.1:8888">5秒后自动跳转</a>
+      </div>
+    </div>
+    {% end %}
+{% end %}
+    
+{% block foot %}{% end %}

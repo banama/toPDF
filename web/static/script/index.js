@@ -3,20 +3,30 @@ define(function(require, exports) {
     
     $('#submit').click(function(){
         var pdfcode = $('#pdfcode').val()
+
+        $('.refer').css('display', 'none');
+        $('.nopdf').css('display', 'none');
         $('.loading').css('display', '');
+        $('.pdf').html('')
+
         $.post('/exsit', {'pdfcode': pdfcode}, function(data){
             if (data === "t"){
-                $('.loading').html("<a href=" + pdfcode + '.pdf'
-                    + "><img src='static/image/pdf.png' width='128px' height='128px'>");
+                $('.loading').css('display', 'none');
+                $('.pdf').css('display', '');
+                $('.pdf').html("<a href='http://topdfs-pdf.stor.sinaapp.com/" + pdfcode + '.pdf'
+                    + "'><img src='http://topdfs-pdf.stor.sinaapp.com/pdf.png' width='128px' height='128px'>");
+                
                 $('.refer').css('display', '');
                 var refers = "<p>在你的网页引用下载该文件</p>" + "<pre>" +
-"&lt;a href='http://topdfs-pdf.stor.sinaapp.com/" +  pdfcode + 
-".pdf'&gt;&lt;img style='position: fixed; top: 75px; right: 75px; border: 0;'" + 
+"&lt;a href='http://topdfs.sinaapp.com/pdf/" +  pdfcode + 
+"' target='_blank' &gt;&lt;img style='position: fixed; top: 75px; right: 75px; border: 0;'" + 
 "src='static/image/pdf32.png'&gt;&lt;/a&gt;"
                 $('.refer').html(refers);
             }
             else{
                 $('.loading').css('display', 'none');
+                $('.nopdf').css('display', '');
+                $('.refer').css('display', 'none');
             }
         })
     })

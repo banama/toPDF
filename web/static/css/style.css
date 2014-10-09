@@ -51,3 +51,20 @@ h1 {
 	margin: 20px;
 	text-align: center;
 }
+
+.pdf {
+	margin: 20px;
+	text-align: center;
+}
+
+.error-no {
+	text-align: center;
+	padding: 50px;
+	border: 1px solid #1da5b5;
+	border-radius: 4px;
+	min-height: 300px;
+}
+
+.nopdf {
+	margin-top: 30px;
+}
