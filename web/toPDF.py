@@ -16,7 +16,7 @@ class topdf(object):
 		fileExt = str(uuid.uuid1())
 	 	f_pdf = fileExt+'.pdf'
 	 	filename = fileExt + '.png'
-	 	w, h = letter
+	 	w = 612.0
 	 	h = w * self.height / self.width
 	 	c = recanvas(f_pdf, pagesize = (w, h))
 	 
@@ -56,7 +56,5 @@ class recanvas(canvas.Canvas):
         if len(self._code): self.showPage()
         pdfdata = self.getpdfdata()
         SaveToFile(self._filename, self, pdfdata)
-
-
  
 

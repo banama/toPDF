@@ -1,8 +1,16 @@
 #coding:utf8
-import tornado.ioloop
 import tornado.web
+import tornado.ioloop
 from toPDF import topdf
 import os
+
+# import tornado.wsgi
+# import sae
+# import tornado
+
+class version(tornado.web.RequestHandler):
+	def get(self):
+		self.write(tornado.version)
 
 class index(tornado.web.RequestHandler):
 	def get(self):
