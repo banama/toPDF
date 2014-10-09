@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block header %}
+<div class="top">
+	<div class="container">
+		<h1>ToPDF</h1>
+		<p>将网页转化为PDF格式文件,  依赖一个Chrome插件,  便可一键转化.</p>
+	
+		<!-- <iframe src="http://ghbtns.com/github-btn.html?user=banama&repo=topdf&type=watch"
+  allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe> -->
+	</div>
+</div>
+{% end %}
+
+{% block container %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<div class="input-group fix-top">
+		      <input type="text" class="form-control" id="pdfcode">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button" id="submit">ToPDF</button>
+		      </span>
+		    </div>
+
+		    <!-- loading -->
+		    <div class="loading" style="display:none">
+		    	<img src="static/image/loading.gif" width="25%" height="25%">
+		    </div>
+
+		    <!-- refer -->
+		    <div class="refer fix-top" style="display:none">
+		    	<p>在你的网页引用下载该文件</p>
+		    	<pre>
+&lt;a href=""&gt;&lt;img style="position: fixed; top: 75px; right: 75px; border: 0;" src="http://www.easyicon.net/api/resize_png_new.php?id=1168993&size=32"&gt;&lt;/a&gt;
+		    	</pre>
+		    	
+		    	<p>
+		    		Ps:
+		    	</p>
+
+		    </div>
+
+<script src="{{ static_url('bower_components/seajs/dist/sea.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+seajs.config({
+    base: "../../../../",
+    alias: {
+      "jquery": "{{ static_url('bower_components/jquery/dist/jquery.min')}}"
+    }
+});
+seajs.use("{{ static_url('script/index.js')}}");
+</script>
+		</div>
+
+		<div class="col-md-1"></div>
+		<div class="col-md-6">
+			<h2>如何使用</h2>
+			 <ol>
+			 	<li>下载并安装 <a href="#"><strong>ToPDF Chrome插件 </strong></a>(<a href="" target="_blank">如何安装chrome插件</a>)</li>
+			 	<li>插件一键生成PDF得到识别码</li>
+			 	<li><a href="">进入 <strong>ToPDF</strong> 主页</a>，通过识别码下载PDF文档</li>
+			 </ol>
+			 <hr class="_hr">
+			<h2> 声明</h2>
+			<ul>
+			 	<li><a href="https://github.com/banama/topdf">完全开源</a></li>
+			 	<li>PDF生成由服务器完成，因此chrome数据将会传回服务器，但服务器不保存数据，缓存一小时</li>
+			 </ul>
+		</div>
+	</div>
+</div>
+{% end %}
+
+{% block foot %}{% end %}

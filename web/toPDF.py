@@ -4,6 +4,7 @@ import base64
 import uuid, os
 from urllib import unquote
 import img2pdf
+import StringIO
 
 class topdf(object):
     def __init__(self, base64img, width, height):
@@ -23,8 +24,14 @@ class topdf(object):
         img = open(self.filename,'wb')
         img.write(base64.b64decode(self.codes))
         img.close()
+        f = open(self.filename, 'r')
+        print f.read() == base64.b64decode(self.codes)
 
-        self.save_pdf()
+        sd = img2pdf.convert([StringIO.StringIO(base64.b64decode(self.codes))], 150, x=620, y="")
+        hand = open(self.f_pdf, 'wb')
+        hand.write(sd)
+        hand.close()
+        #self.save_pdf()
         return self.f_pdf
 
     def save_pdf(self):

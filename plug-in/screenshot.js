@@ -45,7 +45,7 @@ var Screenshotter = {
   // 2
   screenshotVisibleArea: function(shared) {
     var self = this;
-    chrome.tabs.captureVisibleTab(null, { format: "png" /* png, jpeg */, quality: 100 }, function(dataUrl) {
+    chrome.tabs.captureVisibleTab(null, { format: "jpeg" /* png, jpeg */, quality: 100 }, function(dataUrl) {
       if (dataUrl) {
         // Grab successful
         self.imageDataURLPartial.push(dataUrl);
@@ -132,7 +132,7 @@ var Screenshotter = {
             canvas.getContext("2d").drawImage(images[j], 0, cut, width, height, 0, j * images[0].height, width, height);
           }
           
-          callback(canvas.toDataURL("image/png")); // --> CALLBACK (note that the file type is used also in the drag function)
+          callback(canvas.toDataURL("image/jpeg")); // --> CALLBACK (note that the file type is used also in the drag function)
         } else {
           // ****** Down!
           fx(imageDataURLs, imageDirtyCutAt, hasVscrollbar, callback, images, ++i);

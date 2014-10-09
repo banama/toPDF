@@ -54,7 +54,9 @@
             }
         }
     };
-    xhr.open("post", "http://127.0.0.1:8888/", true);
+    console.log(encodeURIComponent(shared.imageDataURL))
+    //xhr.open("post", "http://1.topdfs.sinaapp.com/", true);
+    xhr.open("post", "http://127.0.0.1:8888", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded ");
     xhr.send("img="+encodeURIComponent(shared.imageDataURL)+"&width="+new_image.width+"&height="+new_image.height);
     // ****** Add DOM Elements to Page
@@ -74,7 +76,7 @@
       window.webkitURL.revokeObjectURL(blobURL);
     }
     function actionDrag(e) {
-      e.dataTransfer.setData("DownloadURL", "image/png:" + filename + ".png:" + blobURL);
+      e.dataTransfer.setData("DownloadURL", "image/jpeg:" + filename + ".jpeg:" + blobURL);
     }
     window.document.getElementById('blipshot-dim').addEventListener("click", actionRemoveDiv);
     window.document.getElementById('blipshot-img').addEventListener("dragstart", actionDrag);
