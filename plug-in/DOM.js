@@ -43,12 +43,20 @@
     var blobURL = dataToBlobURL(shared.imageDataURL);
     var new_image = new Image();
     new_image.src = shared.imageDataURL;
-
-    var xhr = new XMLHttpRequest();;
+    var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                alert(xhr.responseText);
+                document.getElementById('blipshot').style.display = "none";
+                var div = window.document.createElement('div');
+                div.id = "info";
+                // div.innerHTML = '<div id="blipshot-dim" style="position: absolute !important; height: ' + 
+                //       window.document.body.scrollHeight + 'px !important; width: 100% !important; top: 0px !important;'+
+                //       ' left: 0px !important; background: #000000 !important; opacity: 0.66 !important; z-index: 666666 !important;"> </div>';
+                div.innerHTML += '<div style="-webkit-box-shadow: 0px 5px 10px #000000;width:350px;color:#444; '+
+                      'margin: 20px; background: #fff; position: absolute; top: 0; right: 0; z-index: 666667 !important;text-align:center;padding:20px"><p>' + 
+                       xhr.responseText + '</p><p>请牢记此识别码</p><p>从<a href="http://topdfs.sinaapp.com/">http://topdfs.sinaapp.com/</a>提取PDF文件</p></div>';
+                window.document.body.appendChild(div);
             } else {
               //success
             }
@@ -62,8 +70,13 @@
     // ****** Add DOM Elements to Page
     var div = window.document.createElement('div');
     div.id = "blipshot";
-    div.innerHTML = '<div id="blipshot-dim" style="position: absolute !important; height: ' + window.document.body.scrollHeight + 'px !important; width: 100% !important; top: 0px !important; left: 0px !important; background: #000000 !important; opacity: 0.66 !important; z-index: 666666 !important;"> </div>';
-    div.innerHTML += '<p style="-webkit-box-shadow: 0px 5px 10px #000000; margin: 20px; background: #ffffff; position: absolute; top: 0; right: 0; z-index: 666667 !important;"><img id="blipshot-img" alt="' + filename + '" src="' +  blobURL + '" width= "400" /></p>';
+    div.innerHTML = '<div id="blipshot-dim" style="position: absolute !important; height: ' + 
+          window.document.body.scrollHeight + 
+          'px !important; width: 100% !important; top: 0px !important; left: 0px !important; ' +
+          'background: #000000 !important; opacity: 0.66 !important; z-index: 666666 !important;"> </div>';
+    div.innerHTML += '<p style="-webkit-box-shadow: 0px 5px 10px #000000; margin: 20px; background: #ffffff;'+ 
+          ' position: absolute; top: 0; right: 0; z-index: 666667 !important;"><img id="blipshot-img" alt="' + 
+          filename + '" src="http://topdfs-pdf.stor.sinaapp.com/loading.gif' + '" width= "100" /></p>';
     window.document.body.appendChild(div);
     
     // ****** Add Event Listeners
@@ -111,7 +124,6 @@
     // Create blob with mime type, create URL for it
     var blob = new Blob([view], {'type': parts[1]});
     var URL = webkitURL.createObjectURL(blob)
-    console.log(URL)
     return URL;
   }
   
