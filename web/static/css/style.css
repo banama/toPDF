@@ -68,3 +68,7 @@ h1 {
 .nopdf {
 	margin-top: 30px;
 }
+
+.btn-default:hover {
+	background: #1da5b5;
+}

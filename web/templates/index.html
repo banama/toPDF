@@ -16,7 +16,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-5">
-			<div class="input-group fix-top">
+			<p class="fix-top">请输入识别码</p>
+			<div class="input-group">
 		      <input type="text" class="form-control" id="pdfcode">
 		      <span class="input-group-btn">
 		        <button class="btn btn-default" type="button" id="submit">ToPDF</button>
@@ -29,7 +30,7 @@
 
 		    <div class="nopdf" style="display:none">
 		    	<p>没有识别码对应的文件，是否文件已过期？请换一个识别码!</p>
-		    	<p> Ps：登录可以保存文件</p>
+		    	<p> Ps：<a href="/login">登录</a>可以保存文件</p>
 		    </div>
 		    
 		    <div class="pdf" style="display:none">
@@ -74,11 +75,17 @@ seajs.use("{{ static_url('script/index.js')}}");
 			<ul>
 			 	<li><a href="https://github.com/banama/topdf">完全开源</a></li>
 			 	<li>PDF生成由服务器完成，因此chrome数据将会传回服务器，但服务器不保存数据，缓存一小时</li>
-			 </ul>
+			</ul>
+
+			<hr class="_hr">
+			<div class="btn-group">
+			  <a href="/login"><button type="button" class="btn btn-default">登录</button></a>
+			</div>
+
 		</div>
 	</div>
 </div>
-<a href='http://topdfs.sinaapp.com/pdf/ada06a00-4fa5-11e4-8b25-dbfc6631a814' target="_blank"><img style='position: fixed; top: 75px; right: 75px; border: 0;'src='static/image/pdf32.png'></a>
+<a href='http://topdfs.sinaapp.com/pdf/ada06a00-4fa5-11e4-8b25-dbfc6631a814' target="_blank"><img style='position: fixed; top: 150px; right: 75px; border: 0;'src='http://download.easyicon.net/png/1168993/32/'></a>
 {% end %}
 
 {% block foot %}{% end %}

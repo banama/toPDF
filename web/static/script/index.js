@@ -20,7 +20,7 @@ define(function(require, exports) {
                 var refers = "<p>在你的网页引用下载该文件</p>" + "<pre>" +
 "&lt;a href='http://topdfs.sinaapp.com/pdf/" +  pdfcode + 
 "' target='_blank' &gt;&lt;img style='position: fixed; top: 75px; right: 75px; border: 0;'" + 
-"src='static/image/pdf32.png'&gt;&lt;/a&gt;"
+"src='http://download.easyicon.net/png/1168993/32/'&gt;&lt;/a&gt;"
                 $('.refer').html(refers);
             }
             else{

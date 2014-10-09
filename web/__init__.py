@@ -48,12 +48,20 @@ class Show(tornado.web.RequestHandler):
             pdf_url=pdfs
             )
 
+class login(tornado.web.RequestHandler):
+    def get(self):
+        self.write('login')
+
+    def post(self):
+        pass
+
 application = tornado.web.Application(
     handlers = [
         (r"/", index),
         (r"/pdf/([0-9a-zA-Z\-]*)", pdf),
         (r"/exsit", exsit),
-        (r"/show", Show)
+        (r"/show", Show),
+        (r"/login", login)
         ],
     template_path=os.path.join(os.path.dirname(__file__), "templates"),
     static_path=os.path.join(os.path.dirname(__file__), "static"),
