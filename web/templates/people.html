@@ -1,1 +1,79 @@
-as
+{% extends "layout.html" %}
+
+{% block header %}
+<div class="top">
+	<div class="container">
+		<h1>ToPDF</h1> 
+		<p>将网页转化为PDF格式文件,  依赖一个Chrome插件,  便可一键转化.</p>
+			
+	</div>
+</div>
+{% end %}
+
+{% block container %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<p class="fix-top">请输入识别码  &nbsp;&nbsp;<a href="javascript:void(0)" id="save" style="display:none">点击保存</a>  </p> 
+			<div class="input-group">
+		      <input type="text" class="form-control" id="pdfcode">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button" id="submit">ToPDF</button>
+		      </span>
+		    </div>
+
+		    <div class="loading" style="display:none">
+		    	<img src="http://topdfs-pdf.stor.sinaapp.com/loading.gif" width="25%" height="25%">
+		    </div>
+
+		    <div class="nopdf" style="display:none">
+		    	<p>没有识别码对应的文件，是否文件已过期？请换一个识别码!</p>
+		    	<p> Ps：<a href="/login">登录</a>可以保存文件</p>
+		    </div>
+		    
+		    <div class="pdf" style="display:none">
+		    </div>
+
+		    <!-- refer -->
+		    <div class="refer fix-top" style="display:none">
+		    	<br>
+		    	<p>在你的网页引用下载该文件</p>
+		    	<pre>
+&lt;a href=""&gt;&lt;img style="position: fixed; top: 75px; right: 75px; border: 0;" src="http://www.easyicon.net/api/resize_png_new.php?id=1168993&size=32"&gt;&lt;/a&gt;
+		    	</pre>
+		    	
+		    	<p>
+		    		Ps:
+		    	</p>
+
+		    </div>
+
+<script src="{{ static_url('bower_components/seajs/dist/sea.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+seajs.config({
+    base: "../../../../",
+    alias: {
+      "jquery": "{{ static_url('bower_components/jquery/dist/jquery.min')}}"
+    }
+});
+
+seajs.use("{{ static_url('script/people.js')}}");
+</script>
+		</div>
+
+		<div class="col-md-1"></div>
+		<div class="col-md-6">
+			<div class="fix-top">{{user}} 保存的文档</div>
+			<ul class="pdflist">
+				{% for i in lists %}
+				<li>
+					<a href="{{i['pdf']}}.pdf"><span><img src="http://topdf.qiniudn.com/pdf32.png"><span>{{i['pdf']}}</a>
+				</li>
+				{% end %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% end %}
+{% block foot %}{% end %}

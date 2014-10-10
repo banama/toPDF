@@ -2,6 +2,7 @@
 import tornado.web
 import requests
 import db
+import hashlib
 
 GITHUB_CLIENT_ID = '218ea45c40986a65f61f'
 GITHUB_CLIENT_SECRRET = '95ad8b3df244277c1a744c55ba15d1a4550a657b'
@@ -13,20 +14,55 @@ GITHUB_API = "https://api.github.com/user?access_token="
 
 class login(tornado.web.RequestHandler):
     def get(self):
-        self.render('login.html')
+
+        if not self.get_cookie('username') and not self.get_cookie('account'):
+            self.render('login.html')
+        else:
+            self.redirect('/people')
 
     def post(self):
-        pass
+        account = str(self.get_arguments('account'))
+        password = hashlib.sha1(''.join(self.get_arguments('password'))).hexdigest()
+        users = db.mdb('topdf', 'user').perform()
+        print type('account')
+        _user = users.find_one({'account': account})
+        if  _user == None:
+            self.redirect('/login')
+        elif _user['password'] != password:
+            self.redirect('/login')
+        else:
+            self.set_cookie('account', account)
+            self.redirect('/people')
+
+class join(tornado.web.RequestHandler):
+    def get(self):
+        if not self.get_cookie('username') and not self.get_cookie('account'):
+            self.render('join.html')
+        else:
+            self.redirect('/people')
+
+    def post(self):
+        account = ''.join(self.get_arguments('account'))
+        password = hashlib.sha1(''.join(self.get_arguments('password'))).hexdigest()
+        users = db.mdb('topdf', 'user').perform()
+        _user = users.find_one({'account': account})
+
+        if  _user == None:
+            users.insert({
+                'account': account,
+                'password': password
+                })
+            self.set_cookie('account', account)
+            self.redirect('/people')
+        else:
+            self.redirect('/join')
 
 class logout(tornado.web.RequestHandler):
     def get(self):
         self.set_cookie('username', '')
-        self.render('login.html')
-        
-class authmiddler(tornado.web.RequestHandler):
-    def require_login(self):
-        if not self.get_cookie('username'):
-            self.redirect('/login')
+        self.set_cookie('account', '')
+        self.redirect('/')
+    
 
 class oauth(tornado.web.RequestHandler):
     def get(self):
@@ -46,22 +82,20 @@ class jump(tornado.web.RequestHandler):
             user = requests.get(GITHUB_API + token['access_token'], headers = headers).json()
 
             self.set_cookie("username", user['login'])
-            self.set_cookie("token", token['access_token'])
 
             users = db.mdb('topdf', 'user').perform()
-            print token['access_token']
             if users.find_one({'username': user['login']}) == None:
-                users.insert({'username': user['login'], 'token': token['access_token']})
+                users.insert({'username': user['login'], 'token': token['access_token'], 'oauth':'github'})
             else:
-                users.update({'username': user['login']},{'$set': {
+                users.update({'username': user['login'], 'oauth': 'github'},{'$set': {
                     'token': token['access_token']}    
                     })
             self.redirect('/people')
         else:
             self.redirect('/login')
-            
+
 class test(tornado.web.RequestHandler):
     def get(self):
         users = db.mdb('topdf', 'user').perform()
-        print users.find_one({'username': "as"})
-        self.write(users.find_one({'username': "as"}))
+        print list(users.find())
+        self.write('1')

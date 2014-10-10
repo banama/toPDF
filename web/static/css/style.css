@@ -72,3 +72,33 @@ h1 {
 .btn-default:hover {
 	background: #1da5b5;
 }
+
+/**/
+.login-input {
+	margin: 0 auto;
+	display:inline;
+	width: 25%;
+}
+
+.login-submit {
+	display:inline;
+	width: 100px;
+}
+
+.oauth {
+	border: 1px solid #999;
+	border-radius: 4px;
+	/*display: block;*/
+	padding: 7px 20px;
+	margin: 0px 10px 10px 0px;
+}
+
+.pdflist {
+	padding: 0px;
+}
+
+.pdflist li {
+	list-style: none;
+	padding: 10px 0px 4px 0px;
+	border-bottom: 1px dashed #1da5b5;
+}

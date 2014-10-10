@@ -5,7 +5,7 @@ from toPDF import topdf
 import os
 import auth
 import people
-
+import base
 
 class version(tornado.web.RequestHandler):
     def get(self):
@@ -52,11 +52,13 @@ application = tornado.web.Application(
         (r"/", index),
         (r"/pdf/([0-9a-zA-Z\-]*)", pdf),
         (r"/exsit", exsit),
+        (r"/join", auth.join),
         (r"/login", auth.login),
         (r"/logout", auth.logout),
         (r"/oauth", auth.oauth),
         (r"/jump", auth.jump),
         (r"/people", people.me),
+        (r"/save", people.save),
         (r"/test", auth.test),
         ],**settings
     )

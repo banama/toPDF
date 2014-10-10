@@ -13,13 +13,14 @@
 	<div class="row">
 		
 		<div class="col-md-12">
-        	<h2 class="form-signin-heading">登录</h2>
-        	<form role="form" action="/login" method="post">
-  		        <input type="text" class="form-control  login-input" placeholder="account" autocomplete="off" autofocus="" name="account">
-  		        <input type="password" class="form-control  login-input" placeholder="Password" autocomplete="off" name="password">
-  		        <input class="form-control login-submit" type="submit" value="登录"></button>
-              <a href="/join"><input class="form-control login-submit" type="button" value="注册"></button></a>
+        	<h2 class="form-signin-heading">注册</h2>
+        	<form role="form" action="/join" method="post" >
+		        <input type="text" class="form-control  login-input" autocomplete="off" name="account">
+		        <input type="password" class="form-control  login-input" autocomplete="off" name="password">
+		        <input  class="form-control login-submit" type="submit" value="提交"></button>
+            <a href="/login"><input class="form-control login-submit" type="button" value="登录"></button></a>
 	    	</form>
+        
     	</div>
 
         <div class="col-md-12 fix-top">
