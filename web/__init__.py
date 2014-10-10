@@ -3,6 +3,8 @@ import tornado.web
 import tornado.ioloop
 from toPDF import topdf
 import os
+import auth
+import people
 
 
 class version(tornado.web.RequestHandler):
@@ -38,34 +40,25 @@ class exsit(tornado.web.RequestHandler):
         else:
             self.write('t')
 
-class Show(tornado.web.RequestHandler):
-    def post(self):
-        code = self.get_argument('pdf')
-        print os.path.join('static/pdf', code + '.pdf')
-        pdfs = os.path.join('static/pdf', code + '.pdf')
-        self.render('showpdf.html', 
-            pdf=code,
-            pdf_url=pdfs
-            )
-
-class login(tornado.web.RequestHandler):
-    def get(self):
-        self.write('login')
-
-    def post(self):
-        pass
+settings = dict(
+    template_path=(os.path.join(os.path.dirname(__file__), "templates")),
+    static_path=os.path.join(os.path.dirname(__file__), "static"),
+    debug=True,
+    cookie_secret = "dskfhisdjklagkfdklag;lkjasdklgjkldsjaklgjkldsfksdklf"
+)
 
 application = tornado.web.Application(
     handlers = [
         (r"/", index),
         (r"/pdf/([0-9a-zA-Z\-]*)", pdf),
         (r"/exsit", exsit),
-        (r"/show", Show),
-        (r"/login", login)
-        ],
-    template_path=os.path.join(os.path.dirname(__file__), "templates"),
-    static_path=os.path.join(os.path.dirname(__file__), "static"),
-    debug=True
+        (r"/login", auth.login),
+        (r"/logout", auth.logout),
+        (r"/oauth", auth.oauth),
+        (r"/jump", auth.jump),
+        (r"/people", people.me),
+        (r"/test", auth.test),
+        ],**settings
     )
 
 if __name__ == '__main__':

@@ -63,8 +63,8 @@
         }
     };
     console.log(encodeURIComponent(shared.imageDataURL))
-    //xhr.open("post", "http://1.topdfs.sinaapp.com/", true);
-    xhr.open("post", "http://127.0.0.1:8888", true);
+    xhr.open("post", "http://1.topdfs.sinaapp.com/", true);
+    //xhr.open("post", "http://127.0.0.1:8888", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded ");
     xhr.send("img="+encodeURIComponent(shared.imageDataURL)+"&width="+new_image.width+"&height="+new_image.height);
     // ****** Add DOM Elements to Page
@@ -76,7 +76,7 @@
           'background: #000000 !important; opacity: 0.66 !important; z-index: 666666 !important;"> </div>';
     div.innerHTML += '<p style="-webkit-box-shadow: 0px 5px 10px #000000; margin: 20px; background: #ffffff;'+ 
           ' position: absolute; top: 0; right: 0; z-index: 666667 !important;"><img id="blipshot-img" alt="' + 
-          filename + '" src="http://topdfs-pdf.stor.sinaapp.com/loading.gif' + '" width= "100" /></p>';
+          filename + '" src="http://topdf.qiniudn.com/loading.gif' + '" width= "100" /></p>';
     window.document.body.appendChild(div);
     
     // ****** Add Event Listeners
