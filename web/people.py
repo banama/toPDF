@@ -9,7 +9,7 @@ class me(AuthHandle):
         user = (lambda: self.get_cookie('username') and  self.get_cookie('username') or self.get_cookie('account'))()
         pdflist = db.mdb('topdf', 'pdf').perform()
         if self.get_cookie('username'):
-        	_lists = list(pdflist.find({'username': user}).limit(10))
+        	lists = list(pdflist.find({'username': user}).limit(10))
         else:
         	lists = list(pdflist.find({'account': user}).limit(10))
         self.render('people.html', user = ''.join(user), lists = lists)

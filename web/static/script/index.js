@@ -14,7 +14,7 @@ define(function(require, exports) {
                 $('.loading').css('display', 'none');
                 $('.pdf').css('display', '');
                 $('.pdf').html("<a href='http://topdfs-pdf.stor.sinaapp.com/" + pdfcode + '.pdf'
-                    + "'><img src='http://topdfs-pdf.stor.sinaapp.com/pdf.png' width='128px' height='128px'>");
+                    + "'><img src='http://topdf.qiniudn.com/pdf.png' width='128px' height='128px'>");
                 
                 $('.refer').css('display', '');
                 var refers = "<p>在你的网页引用下载该文件</p>" + "<pre>" +

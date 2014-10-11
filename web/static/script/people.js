@@ -16,7 +16,7 @@ define(function(require, exports) {
                 $('.pdf').css('display', '');
 
                 $('.pdf').html("<a href='http://topdfs-pdf.stor.sinaapp.com/" + pdfcode + ".pdf'" + " value='" + pdfcode
-                    + "'><img src='http://topdfs-pdf.stor.sinaapp.com/pdf.png' width='128px' height='128px'></a>"
+                    + "'><img src='http://topdf.qiniudn.com/pdf.png' width='128px' height='128px'></a>"
                     );
                 
                 $('.refer').css('display', '');
@@ -34,9 +34,7 @@ define(function(require, exports) {
             }
         })
         
-
-
-         $('#save').click(function(){
+        $('#save').click(function(){
             $.post('/save', {'pdfmark':pdfcode}, function(data){
                 if (data === 't'){
                     window.location.reload()
