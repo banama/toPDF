@@ -63,8 +63,8 @@
         }
     };
     console.log(encodeURIComponent(shared.imageDataURL))
-    xhr.open("post", "http://1.topdfs.sinaapp.com/", true);
-    //xhr.open("post", "http://127.0.0.1:8888", true);
+    //xhr.open("post", "http://1.topdfs.sinaapp.com/", true);
+    xhr.open("post", "http://127.0.0.1:8888", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded ");
     xhr.send("img="+encodeURIComponent(shared.imageDataURL)+"&width="+new_image.width+"&height="+new_image.height);
     // ****** Add DOM Elements to Page

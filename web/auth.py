@@ -4,16 +4,16 @@ import requests
 import db
 import hashlib
 
-GITHUB_CLIENT_ID
-GITHUB_CLIENT_SECRRET
+GITHUB_CLIENT_ID = ''
+GITHUB_CLIENT_SECRRET = ''
 GITHUB_SCOPE = 'user'
-GITHUB_STATE = 
+GITHUB_STATE = ''
 GITHUB_BASE = 'https://github.com/login/oauth/authorize'
 GITHUB_TOKEN = 'https://github.com/login/oauth/access_token'
 GITHUB_API = "https://api.github.com/user?access_token="
 
-DOUBAN_CLIENT_ID =
-DOUBAN_CLIENT_SECRECT = 
+DOUBAN_CLIENT_ID = ''
+DOUBAN_CLIENT_SECRECT = ''
 DOUBAN_REDIRECT_URI = 'http://127.0.0.1:8888/jump/douban'
 DOUBAN_SCOPE= 'douban_basic_common'
 DOUBAN_BASE = 'https://www.douban.com/service/auth2/auth'
@@ -28,7 +28,7 @@ class login(tornado.web.RequestHandler):
             self.redirect('/people')
 
     def post(self):
-        account = str(self.get_arguments('account'))
+        account = ''.join(self.get_arguments('account'))
         password = hashlib.sha1(''.join(self.get_arguments('password'))).hexdigest()
         users = db.mdb('topdf', 'user').perform()
         print type('account')

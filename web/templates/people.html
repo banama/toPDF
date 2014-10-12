@@ -61,15 +61,11 @@ seajs.use("{{ static_url('script/people.js')}}");
 </script>
 		</div>
 
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="fix-top">{{user}} 保存的文档</div>
+		<!-- <div class="col-md-1"></div> -->
+		<div class="col-md-7">
+			<div class="fix-top">『{{user}}』保存的文档 (<a href="/logout">退出</a>)</div>
 			<ul class="pdflist">
-				{% for i in lists %}
-				<li>
-					<a href="{{i['pdf']}}.pdf"><span><img src="http://topdf.qiniudn.com/pdf32.png"><span>{{i['pdf']}}</a>
-				</li>
-				{% end %}
+			
 			</ul>
 		</div>
 	</div>

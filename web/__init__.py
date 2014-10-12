@@ -6,6 +6,7 @@ import os
 import auth
 import people
 import base
+import db
 
 class version(tornado.web.RequestHandler):
     def get(self):
@@ -13,7 +14,11 @@ class version(tornado.web.RequestHandler):
 
 class index(tornado.web.RequestHandler):
     def get(self):
-        self.render('index.html', pdf = "_topdf.topdf()")
+        if self.get_cookie('username') or self.get_cookie('account'):
+            login = '我的文档'
+        else:
+            login = '登录'
+        self.render('index.html', login = login)
 
     def post(self):
         img = self.get_argument('img')
@@ -35,7 +40,8 @@ class pdf(tornado.web.RequestHandler):
 class exsit(tornado.web.RequestHandler):
     def post(self):
         pdfcode = self.get_argument('pdfcode')
-        if pdfcode == '1':
+        pdfexsit = db.mdb('topdf', 'pdfexsit').perform()
+        if pdfexsit.find_one({'pdf': pdfcode}) == None:
             self.write('f')
         else:
             self.write('t')
@@ -58,7 +64,10 @@ application = tornado.web.Application(
         (r"/oauth/(\w+)", auth.oauth),
         (r"/jump/(\w+)", auth.jump),
         (r"/people", people.me),
+        (r'/pdflist', people.pdflist),
         (r"/save", people.save),
+        (r"/remark", people.remark),
+        (r"/delete", people.delete),
         (r"/test", auth.test),
         ],**settings
     )
